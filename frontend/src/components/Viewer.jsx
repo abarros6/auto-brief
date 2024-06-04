@@ -41,7 +41,6 @@ const Viewer = () => {
       
         const response = await fetch('http://localhost:3000/api/upload-pdf', {
           method: 'POST',
-          headers: { 'Content-Type': 'multipart/form-data' },
           body: formData
         });
       
@@ -58,7 +57,7 @@ const Viewer = () => {
     const uploadOnClick = async () => {
         try {
             const response = await uploadPdf(pdf);
-            console.log(response);
+            console.log(response.body);
         } catch (error) {
             console.error(error);
         }
