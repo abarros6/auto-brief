@@ -11,6 +11,15 @@ export async function generateSummary(decision) {
     console.log(typeof(summary))
     return summary
 }
+
+const removeCharactersBeforeAndAfterBraces = (str) => {
+    const regex = /^.*{|\}(.*?)$/g;
+    const match = regex.exec(str);
+    if (match && match[1]) {
+        return match[1];
+    }
+    return str;
+};
 //Turns plaintext of a judicial decision into a case brief with citations
 async function GPT(plaintext){
     let summary
