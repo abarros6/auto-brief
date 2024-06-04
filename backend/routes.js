@@ -8,3 +8,5 @@ router.post('/generate-summary', async (req, res) => {
     const summary = await generateSummary(decision);
     res.send(summary);
 });
+
+export default router;
