@@ -1,11 +1,18 @@
+import OpenAI from 'openai';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const openai = new OpenAI();
+
 export async function generateSummary(decision) {
-    summary = await GPT(decision)
-    summary = await reformatSummary(summary)
+    let summary = await GPT(decision)
+    summary = reformatSummary(summary)
     return summary
 }
 //Turns plaintext of a judicial decision into a case brief with citations
 async function GPT(plaintext){
     //TO-DO: FIGURE OUT THE SYSTEM PROMPT
+    let summary
     const prompt = decidePrompt();
     const response = await openai.chat.completions.create({
         model: "gpt-4o",
@@ -27,11 +34,11 @@ async function GPT(plaintext){
 }
 
 
-async function reformatSummary(GPTSummary) {
-    const result = [[],[]];
+function reformatSummary(GPTSummary) {
+    let result = [[],[]];
     let currentPart = "";
-    const char = "";
-    const o = 0;
+    let char = "";
+    let o = 0;
 
     for (let i = 0; i < GPTSummary.length; i++) {
         char = GPTSummary[i];
@@ -51,7 +58,7 @@ async function reformatSummary(GPTSummary) {
     return result;
   }
 
-async function decidePrompt(){
+function decidePrompt(){
     let prompt = `You will write a case brief for me.
     The case brief will be a summary of a case that 
     will be provided to you. The brief will be formatted 
@@ -65,7 +72,7 @@ async function decidePrompt(){
     promptList.push("5. The legal reasoning behind the decision\n");
     promptList.push(`6. Any rationale of public policy used 
     in the decision's legal reasoning\n`);
-    const finalPrompt = (`Each section will conclude with a #. 
+    let finalPrompt = (`Each section will conclude with a #. 
     When all six sections have been completed, write a ##\n
     You will then begin doing something else: you will
     write citations for each of the above generated sections.
