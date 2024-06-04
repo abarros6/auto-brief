@@ -14,7 +14,7 @@ const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
 // POST route to handle PDF upload and conversion to text
-router.post('/upload-pdf', upload.single('pdf'), (req, res) => {
+router.post('/upload-pdf', upload.single('pdf'), async (req, res) => {
     if (!req.file) {
         return res.status(400).send('No file uploaded.');
     }
@@ -35,9 +35,8 @@ router.post('/upload-pdf', upload.single('pdf'), (req, res) => {
                     console.error('Error deleting file:', unlinkErr);
                 }
             });
-            
-            // Send the extracted text as the response
-            res.send(generateSummary(data.text));
+
+            generateSummary(data.text).then((a)=>{res.status(200).send(a)});
         }).catch(parseErr => {
             res.status(500).send('Error parsing PDF.');
         });

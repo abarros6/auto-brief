@@ -44,17 +44,20 @@ function reformatSummary(GPTSummary) {
         char = GPTSummary[i];
         if (char !== "#"){
             currentPart += char;
-            continue
         }
         else if (char === "#") {
-            result[o].push(currentPart);
+            //console.log(currentPart);
+            if(currentPart !== ""){
+                result[o].push(currentPart);
+            }
             currentPart = "";
-            if(GPTSummary[i+1] === "#")
-                i++;
-                o++;
+            if(GPTSummary[i+1] === "#"){
+                if(o === 0)
+                    o++;
+            }
         }    
     }
-  
+    //console.log(result);
     return result;
   }
 
