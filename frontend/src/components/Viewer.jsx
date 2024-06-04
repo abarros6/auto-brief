@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 const Viewer = () => {
     const [pdf, setPdf] = useState(null);
-    const [text, setText] = useState('')
+    const [text, setText] = useState('testing')
   
     const handleFileChange = (event) => {
       setPdf(event.target.files[0]);
@@ -48,16 +48,15 @@ const Viewer = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
       
-        const data = await response;
-
-        setText(data)
+        const data = await response.json();
         return data;
     }
     
     const uploadOnClick = async () => {
         try {
             const response = await uploadPdf(pdf);
-            console.log(response.body);
+            setText(response.brief.facts);
+            console.log(response.brief.facts);
         } catch (error) {
             console.error(error);
         }
@@ -87,16 +86,16 @@ const Viewer = () => {
                     {pdf && <p>Selected PDF: {pdf.name}</p>}
                 </div>
             </div>
-            <div className='h-screen' id='pdf-viewer'>
-            </div>
             {
-                text && (
+                text.length > 0 && (
                     <div>
                         <h2>Extracted Text:</h2>
-                        <div className="border border-gray-300 p-4"></div>
+                        <div className="border border-gray-300 p-4">{text}</div>
                     </div>
                 )
             }
+            <div className='h-screen' id='pdf-viewer'/>
+            
       </div>
     )
 }
