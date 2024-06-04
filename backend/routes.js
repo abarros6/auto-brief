@@ -11,6 +11,7 @@ router.post('/generate-summary', async (req, res) => {
 
 router.post('/upload-pdf', async (req, res) => {
     const { pdf } = req.body;
+    res.status(200).send({data: pdf});
     
 });
 

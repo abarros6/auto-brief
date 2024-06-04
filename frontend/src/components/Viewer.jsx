@@ -49,16 +49,15 @@ const Viewer = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
       
-        const data = await response.data.text();
+        const data = await response;
 
         setText(data)
         return data;
     }
     
     const uploadOnClick = async () => {
-        const file = document.getElementById('file-input').files[0]
         try {
-            const response = await uploadPdf(file);
+            const response = await uploadPdf(pdf);
             console.log(response);
         } catch (error) {
             console.error(error);
@@ -68,7 +67,7 @@ const Viewer = () => {
     const generatePdf = () => {
         PdfGenerator();
     }
-    
+
     return (
         <div>
             <div className='flex flex-row justify-center'>
@@ -95,7 +94,7 @@ const Viewer = () => {
                 text && (
                     <div>
                         <h2>Extracted Text:</h2>
-                        <div className="border border-gray-300 p-4">{text}</div>
+                        <div className="border border-gray-300 p-4"></div>
                     </div>
                 )
             }
