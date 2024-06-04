@@ -1,5 +1,5 @@
 export async function generateSummary(decision) {
-    summary = await GPT(await convertToPlaintext(decision))
+    summary = await GPT(decision)
     summary = await reformatSummary(summary)
     return summary
 }
@@ -24,11 +24,6 @@ async function GPT(plaintext){
     summary = response.choices[0].message.content
 
     return summary
-}
-
-//Converts pdf into plaintext
-async function convertToPlaintext(decision) {
-    return plaintext
 }
 
 
@@ -57,7 +52,7 @@ async function reformatSummary(GPTSummary) {
   }
 
 async function decidePrompt(){
-    const prompt = `You will write a case brief for me.
+    let prompt = `You will write a case brief for me.
     The case brief will be a summary of a case that 
     will be provided to you. The brief will be formatted 
     into sections as follows:\n

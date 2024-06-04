@@ -60,9 +60,9 @@ router.post('/upload-pdf', upload.single('pdf'), (req, res) => {
                     console.error('Error deleting file:', unlinkErr);
                 }
             });
-
+            
             // Send the extracted text as the response
-            res.send(data.text);
+            res.send(generateSummary(data.text));
         }).catch(parseErr => {
             res.status(500).send('Error parsing PDF.');
         });
