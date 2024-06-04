@@ -5,7 +5,7 @@ import pdf from 'pdf-parse';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import summary from './summary.json'
+import summary from './summary.json' assert {type: 'json'}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

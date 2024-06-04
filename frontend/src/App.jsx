@@ -1,5 +1,6 @@
 import React from 'react';
 import Viewer from './components/Viewer';
+import Editor from './components/Editor';
 
 const App = () => {
 
