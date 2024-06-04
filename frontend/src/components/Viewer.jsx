@@ -1,4 +1,4 @@
-import PdfGenerator from '../pdfGenerator.js';
+import PdfGenerator from '../utils/pdfGenerator.js';
 import React, {useState} from 'react';
 import Editor from './Editor.jsx';
 
@@ -62,8 +62,8 @@ const Viewer = () => {
                     upload
                 </button>
                 <div>
-                    <input type="file" accept=".pdf" onChange={handleFileChange} />
-                    {pdf && <p>Selected PDF: {pdf.name}</p>}
+                    <input className='m-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'type="file" accept=".pdf" onChange={handleFileChange} />
+                    {/* {pdf && <p>Selected PDF: {pdf.name}</p>} */}
                 </div>
             </div>
             {/* {
