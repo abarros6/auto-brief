@@ -5,7 +5,7 @@ import { saveAs } from "file-saver";
 import { pdfExporter } from "quill-to-pdf";
 import { downloadObjectAsJson } from "../utils/download.js";
 
-function Editor({content, setContent}) {
+function Editor({content, setContent, document, setDocument}) {
 
     const [value, setValue] = useState(
         JSON.parse(localStorage.getItem("document") || "[]")
@@ -20,19 +20,6 @@ function Editor({content, setContent}) {
         downloadObjectAsJson(deltas.ops, "editor-text");
     };
 
-    // const importDocument = (event) => {
-    //     const Jsonfile = event.target.files?.[0];
-    //     var reader = new FileReader();
-
-    //     if (!Jsonfile) return;
-
-    //     reader.readAsText(Jsonfile, "UTF-8");
-    //     reader.onload = function (evt) {
-    //         const delta = JSON.parse(evt.target?.result);
-    //         editorRef.current?.editor?.setContents(delta);
-    //     };
-    // };
-
     const exportAsPDF = async () => {
         const delta = editorRef.current?.editor?.getContents(); // gets the Quill delta
         const pdfAsBlob = await pdfExporter.generatePdf(delta); // converts to PDF
@@ -45,7 +32,7 @@ function Editor({content, setContent}) {
 
     useEffect(() => {
         generateText()
-    }, []) 
+    }, [content]) 
 
     const generateText = () => {
         let brief = content.brief
@@ -83,48 +70,53 @@ function Editor({content, setContent}) {
                 <button className='m-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' onClick={exportDocument}>
                     Export as file
                 </button>
-                {/* <input
-                    id="import-file"
-                    type="file"
-                    className="button"
-                    onChange={importDocument}
-                    title="Import file"
-                    hidden={true}
-                />
-                <button className='m-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
-                    <label
-                    style={{ height: "100%", width: "100%" }}
-                    htmlFor="import-file"
-                    className="custom-file-upload"
-                    >
-                    Import file
-                    </label>
-                </button> */}
                 <button className='m-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' onClick={clearDocument}>
                     Clear document
                 </button>
                 </div>
                 <ReactQuill
-                defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
-                style={{ height: "60vh", width: "100%" }}
-                theme="snow"
-                value={value}
-                onChange={setValue}
-                modules={{
-                    toolbar: [
-                    ["bold", "italic", "underline", "strike"],
-                    [{ color: [] }],
-                    [{ align: [] }],
-                    [{ font: [] }],
-                    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                    [{ header: 1 }, { header: 2 }],
-                    [{ size: ["small", false, "large", "huge"] }],
-                    ["blockquote", "code-block"],
-                    ["video", "link", "formula"],
-                    [{ list: "ordered" }, { list: "bullet" }]
-                    ]
-                }}
-                ref={editorRef}
+                    defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
+                    style={{ height: "60vh", width: "100%" }}
+                    theme="snow"
+                    value={value}
+                    onChange={setValue}
+                    modules={{
+                        toolbar: [
+                        ["bold", "italic", "underline", "strike"],
+                        [{ color: [] }],
+                        [{ align: [] }],
+                        [{ font: [] }],
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        [{ header: 1 }, { header: 2 }],
+                        [{ size: ["small", false, "large", "huge"] }],
+                        ["blockquote", "code-block"],
+                        ["video", "link", "formula"],
+                        [{ list: "ordered" }, { list: "bullet" }]
+                        ]
+                    }}
+                    ref={editorRef}
+                />
+                <ReactQuill
+                    defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
+                    style={{ height: "60vh", width: "100%" }}
+                    theme="snow"
+                    value={document}
+                    onChange={setDocument}
+                    modules={{
+                        toolbar: [
+                        ["bold", "italic", "underline", "strike"],
+                        [{ color: [] }],
+                        [{ align: [] }],
+                        [{ font: [] }],
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        [{ header: 1 }, { header: 2 }],
+                        [{ size: ["small", false, "large", "huge"] }],
+                        ["blockquote", "code-block"],
+                        ["video", "link", "formula"],
+                        [{ list: "ordered" }, { list: "bullet" }]
+                        ]
+                    }}
+                    ref={editorRef}
                 />
         </>
     )

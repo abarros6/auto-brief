@@ -4,7 +4,11 @@ import Editor from './Editor.jsx';
 
 const Viewer = () => {
     const [pdf, setPdf] = useState(null);
-    const [content, setContent] = useState(null);
+    const [content, setContent] = useState({
+        brief:{},
+        citations: {},
+    });
+    const [document, setDocument] = useState('')
   
     const handleFileChange = (event) => {
       setPdf(event.target.files[0]);
@@ -31,12 +35,13 @@ const Viewer = () => {
     const uploadOnClick = async () => {
         try {
             const response = await uploadPdf(pdf);
-            let brief = response.brief
-            let citations = response.citations
+            let brief = response.summary.brief
+            let citations = response.summary.citations
+            let text = response.pdfText
 
             setContent({brief: brief, citations: citations});
+            setDocument(text)
 
-            console.log(response.brief.facts);
         } catch (error) {
             console.error(error);
         }
@@ -67,22 +72,20 @@ const Viewer = () => {
                 </div>
             </div>
             {/* {
-                text.length > 0 && (
-                    <div>
-                        <h2>Extracted Text:</h2>
-                        <div className="border border-gray-300 p-4">{text}</div>
-                    </div>
-                )
-            } */}
-            {
                 content && (
                     <Editor
                         content={content}
                         setContent={setContent}
                     />
                 )
-            }
-            <div className='h-screen' id='pdf-viewer'/>
+            } */}
+            <Editor
+                content={content}
+                setContent={setContent}
+                document={document}
+                setDocument={setDocument}
+            />
+            {/* <div className='h-screen' id='pdf-viewer'/> */}
             
       </div>
     )
