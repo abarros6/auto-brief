@@ -4,7 +4,7 @@
 - get pdf on backend and convert to plaintext to submit to gpt api 
 - get back gpt response in this format: 
 
-citation = {
+brief = {
     facts: string,
     issues: string,
     held: string,
@@ -13,4 +13,6 @@ citation = {
     policy: string
 }
 
+//figuring it out 
+citations = [[facts], [issues], [held], [ratio], [reasoning], [policy]]
 - pasrse and display citation object in UI 
