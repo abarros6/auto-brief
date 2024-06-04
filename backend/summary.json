@@ -1,0 +1,36 @@
+{
+    "brief": {
+        "facts": "Cumberland Mortgage Corporation Ltd. and First City Investments Ltd. brought separate actions against Fraser Arms Hotel Ltd. for fees due under agreements made in May 1976. Cumberland arranged for a loan from First City, which then appointed City Savings & Trust Company as the lender. Several issues arose concerning a 17-foot strip of land and the appellant's obligations under the agreements.",
+        "issues": "1. Whether the letter agreement of 4th June 1976 between the appellant and First City constituted a binding contract. 2. Whether the demands made by City Savings constituted a breach of contract, absolving the appellant from further performance.",
+        "held": "The Court of Appeal dismissed the appeal, holding that the letter agreement of 4th June 1976 was a binding contract and that the appellant was not absolved from performance by the demands made by City Savings.",
+        "ratio": "The letter agreement contained sufficient terms to form a binding contract. The demands made by City Savings were reasonable under the terms of the agreement and did not constitute a breach that would absolve the appellant from performance.",
+        "reasoning": "The court found that the essential terms of the contract were clear within the four corners of the letter agreement. The demands made by City Savings were within their rights under the agreement, and the appellant's failure to meet these demands did not absolve them from their contractual obligations.",
+        "policy": "The court emphasized the importance of upholding contractual agreements where the intentions of the parties can be clearly determined from the agreement, promoting certainty and reliability in commercial transactions."
+    },
+    "citations": {
+        "facts": [
+            "Cumberland and First City each recovered judgment against the appellant.",
+            "In May 1976 the appellant retained Cumberland to negotiate on its behalf a loan of one million dollars net."
+        ],
+        "issues": [
+            "The first ground of appeal advanced on behalf of the appellant to defeat the claims of Cumberland and First City was that the letter agreement of 4th June 1976, the so-called commitment letter, was not a binding contract between the appellant and First City.",
+            "Even if the court concluded that the commitment letter was a binding contract, nevertheless counsel for the appellant contended that the demands of the solicitors for City Savings constituted a breach of contract of such a kind as justified the appellant in regarding itself as absolved or discharged from further performance on its side of the contract."
+        ],
+        "held": [
+            "In the result, I would dismiss the appeal against First City.",
+            "Therefore, the appeal involving Cumberland should be dismissed."
+        ],
+        "ratio": [
+            "It is only the lack of a term that is so essential to the contract that without it the court cannot collect the real intentions of the parties from the language within the four comers of the instrument and so cannot give effect to such intentions by supplying anything necessarily to be inferred that will render the contract unenforceable.",
+            "if the real intentions of the parties can be collected from the language within the four corners of the instrument, the court must give effect to such intentions by supplying anything necessarily to be inferred and rejecting whatever is repugnant to such real intentions so ascertained."
+        ],
+        "reasoning": [
+            "With respect to the monthly payments, the commitment letter provided that interest was to be paid “at the rate of 13¼ per cent per annum calculated semi-annually not in advance.”",
+            "The letter agreement of 4th June 1976 provided as follows in dealing with the security for the loan: 'The Loan shall be secured by: ...'"
+        ],
+        "policy": [
+            "In my view, the approach adopted by Wilson C.J.S.C. in the Diamond Devs. case, supra, is not appropriate. Rather the approach to be adopted is that set out by Bull J.A. in Marquest Industs. Ltd. v. Willows Poultry Farm Ltd. (1968), 66 W.W.R. 477, 1 D.L.R. (3d) 513 (B.C.C.A.).",
+            "If any of the above events occur, the Lender, at its election, will have no obligation to make any advances under the Loan ..."
+        ]
+    }
+}

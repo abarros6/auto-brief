@@ -5,6 +5,7 @@ import pdf from 'pdf-parse';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import summary from './summary.json'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,28 +20,30 @@ router.post('/upload-pdf', upload.single('pdf'), async (req, res) => {
         return res.status(400).send('No file uploaded.');
     }
 
-    const filePath = path.join(__dirname, 'uploads', req.file.filename);
+    res.send(summary).status(200)
+
+    //const filePath = path.join(__dirname, 'uploads', req.file.filename);
 
     // Read the uploaded PDF file
-    fs.readFile(filePath, (err, dataBuffer) => {
-        if (err) {
-            return res.status(500).send('Error reading file.');
-        }
+    // fs.readFile(filePath, (err, dataBuffer) => {
+    //     if (err) {
+    //         return res.status(500).send('Error reading file.');
+    //     }
 
-        // Parse the PDF file
-        pdf(dataBuffer).then(data => {
-            // Delete the file after parsing
-            fs.unlink(filePath, unlinkErr => {
-                if (unlinkErr) {
-                    console.error('Error deleting file:', unlinkErr);
-                }
-            });
+    //     // Parse the PDF file
+    //     pdf(dataBuffer).then(data => {
+    //         // Delete the file after parsing
+    //         fs.unlink(filePath, unlinkErr => {
+    //             if (unlinkErr) {
+    //                 console.error('Error deleting file:', unlinkErr);
+    //             }
+    //         });
 
-            generateSummary(data.text).then((a)=>{res.status(200).send(a)});
-        }).catch(parseErr => {
-            res.status(500).send('Error parsing PDF.');
-        });
-    });
+    //         generateSummary(data.text).then((a)=>{res.status(200).send(a)});
+    //     }).catch(parseErr => {
+    //         res.status(500).send('Error parsing PDF.');
+    //     });
+    // });
 });
 
 export default router;
