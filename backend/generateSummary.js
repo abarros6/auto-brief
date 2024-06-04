@@ -6,20 +6,22 @@ const openai = new OpenAI();
 
 export async function generateSummary(decision) {
     let summary = await GPT(decision)
-    //summary = reformatSummary(summary)
+    summary = trimString(summary)
+    summary = JSON.parse(summary)
     console.log(summary)
-    console.log(typeof(summary))
     return summary
 }
 
-const removeCharactersBeforeAndAfterBraces = (str) => {
-    const regex = /^.*{|\}(.*?)$/g;
-    const match = regex.exec(str);
-    if (match && match[1]) {
-        return match[1];
-    }
-    return str;
-};
+function trimString(input) {
+    // Remove characters before the first '{'
+    input = input.replace(/^[^{]*/, '');
+    
+    // Remove characters after the final '}'
+    input = input.replace(/[^}]*$/, '');
+    
+    return input;
+}
+
 //Turns plaintext of a judicial decision into a case brief with citations
 async function GPT(plaintext){
     let summary
@@ -39,10 +41,6 @@ async function GPT(plaintext){
         temperature: 0.7,
     })
     summary = response.choices[0].message.content
-
-    summary = summary.trim()
-
-    summary = JSON.parse(summary)
 
     return summary
 }
