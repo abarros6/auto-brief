@@ -6,7 +6,9 @@ function Document ({content, setContent, document, setDocument, viewerRef, edito
         <div className='flex flex-col lg:flex-row gap-8'>
             <Viewer document={document} setDocument={setDocument} viewerRef={viewerRef}/>
             {/* <div className="divider h-full divider-horizontal"/>  */}
-            <Editor content={content} setContent={setContent} editorRef={editorRef}/>
+            {
+                content && <Editor content={content} setContent={setContent} editorRef={editorRef}/>
+            }
         </div>
     )
 }

@@ -40,6 +40,7 @@ function Editor({content, setContent, editorRef}) {
             value={value}
             setValue={setValue}
             reference={editorRef}
+            readOnly={false}
         />  
 
     )

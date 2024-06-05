@@ -1,4 +1,4 @@
-function Navbar ({uploadOnClick, handleFileChange, exportAsPDF, clearDocument, exportDocument, exportAsDOCX}) {
+function Navbar ({uploadOnClick, handleFileChange, exportAsPDF, clearDocument, exportDocument, exportAsDOCX, uploaded}) {
     return ( 
         <div className="navbar rounded-md bg-secondary">
             <div className="navbar-start">
@@ -26,6 +26,7 @@ function Navbar ({uploadOnClick, handleFileChange, exportAsPDF, clearDocument, e
                         <button
                             onClick={uploadOnClick}
                             className='btn btn-primary m-1'
+                            disabled={uploaded}
                         >
                             Upload PDF
                         </button>
@@ -35,7 +36,7 @@ function Navbar ({uploadOnClick, handleFileChange, exportAsPDF, clearDocument, e
                     </div>
                 </ul>
             </div>
-            <div className="navbar-end">
+            <div className="navbar-end hidden lg:flex">
                 <details className="dropdown dropdown-end">
                     <summary className="m-1 btn bg-primary">Editable Document Options</summary>
                     <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">

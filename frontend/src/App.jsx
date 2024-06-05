@@ -10,13 +10,27 @@ import * as quillToWord from "quill-to-word";
 
 const App = () => {
   const [pdf, setPdf] = useState(null);
-  const [content, setContent] = useState({
-      brief:{},
-      citations: {},
-  });
+  // const [content, setContent] = useState({
+  //     brief:{},
+  //     citations: {},
+  // });
+  const [uploaded, setUploaded] = useState(false);
+  const [content, setContent] = useState(null);
   const [document, setDocument] = useState('')
   const editorRef = useRef(null);
   const viewerRef = useRef(null);
+
+  const spotPara = (text) => {
+    // Define the regular expression to find square brackets containing numbers
+    const regex = /\[(\d+)\]/g;
+  
+    // Use the replace method to inject line breaks and wrap the matched content in <h3> tags
+    const transformedString = text.replace(regex, (match, p1) => {
+        return `<br><h3>${match}</h3>`;
+    });
+  
+    return transformedString;
+  }
 
   const exportDocument = () => {
       const deltas = editorRef.current?.editor?.getContents();
@@ -76,6 +90,7 @@ const App = () => {
 
           setContent({brief: brief, citations: citations});
           setDocument(spotPara(text))
+          setUploaded(true)
 
       } catch (error) {
           console.error(error);
@@ -91,6 +106,7 @@ const App = () => {
         clearDocument={clearDocument}
         exportDocument={exportDocument}  
         exportAsDOCX={exportAsDOCX}
+        uploaded={uploaded}
       />
       <h1 className='p-8 text-4xl'>Auto-Brief</h1>
       <Documents
@@ -103,18 +119,6 @@ const App = () => {
       />
     </div>
   )
-}
-
-const spotPara = (text) => {
-  // Define the regular expression to find square brackets containing numbers
-  const regex = /\[(\d+)\]/g;
-
-  // Use the replace method to inject line breaks and wrap the matched content in <h3> tags
-  const transformedString = text.replace(regex, (match, p1) => {
-      return `<br><h3>${match}</h3>`;
-  });
-
-  return transformedString;
 }
 
 export default App

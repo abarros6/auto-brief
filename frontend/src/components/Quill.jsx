@@ -1,14 +1,16 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-function Quill ({value, setValue, reference}) {
+function Quill ({value, setValue, reference, readOnly, color = ''}) {
+    
     return (
         <ReactQuill
             defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
-            style={{ height: "100vh", width: "100%", overflow: "hidden"}}
+            style={{ height: "100vh", width: "100%", overflow: "hidden", backgroundColor: color }}
             theme="snow"
             value={value}
             onChange={setValue}
+            readOnly={readOnly}
             modules={{
                 toolbar: [
                 ["bold", "italic", "underline", "strike"],
