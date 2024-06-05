@@ -75,7 +75,7 @@ const App = () => {
           let text = response.pdfText
 
           setContent({brief: brief, citations: citations});
-          setDocument(text)
+          setDocument(spotPara(text))
 
       } catch (error) {
           console.error(error);
@@ -103,6 +103,18 @@ const App = () => {
       />
     </div>
   )
+}
+
+const spotPara = (text) => {
+  // Define the regular expression to find square brackets containing numbers
+  const regex = /\[(\d+)\]/g;
+
+  // Use the replace method to inject line breaks and wrap the matched content in <h3> tags
+  const transformedString = text.replace(regex, (match, p1) => {
+      return `<br><h3>${match}</h3>`;
+  });
+
+  return transformedString;
 }
 
 export default App
