@@ -3,9 +3,9 @@ import Editor from './Editor'
 
 function Document ({content, setContent, document, setDocument, viewerRef, editorRef}) {
     return (
-        <div className='flex flex-row'>
+        <div className='flex flex-col lg:flex-row'>
             <Viewer document={document} setDocument={setDocument} viewerRef={viewerRef}/>
-            <div className="divider h-full divider-horizontal"/> 
+            {/* <div className="divider h-full divider-horizontal"/>  */}
             <Editor content={content} setContent={setContent} editorRef={editorRef}/>
         </div>
     )

@@ -6,7 +6,7 @@ const Viewer = ({document, setDocument, viewerRef}) => {
     return (
         <ReactQuill
             defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
-            style={{ height: "60vh", width: "100%" }}
+            style={{ height: "", width: "100%" }}
             theme="snow"
             value={document}
             onChange={setDocument}
