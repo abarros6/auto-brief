@@ -39,7 +39,7 @@ function Editor({content, setContent, editorRef}) {
         <Quill
             value={value}
             setValue={setValue}
-            ref={editorRef}
+            reference={editorRef}
         />  
 
     )

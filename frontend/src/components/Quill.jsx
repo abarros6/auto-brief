@@ -1,11 +1,11 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-function Quill ({value, setValue, ref}) {
+function Quill ({value, setValue, reference}) {
     return (
         <ReactQuill
             defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
-            style={{ height: "50vh", width: "100%", overflow: "hidden"}}
+            style={{ height: "100vh", width: "100%", overflow: "hidden"}}
             theme="snow"
             value={value}
             onChange={setValue}
@@ -23,7 +23,7 @@ function Quill ({value, setValue, ref}) {
                 [{ list: "ordered" }, { list: "bullet" }]
                 ]
             }}
-            ref={ref}
+            ref={reference}
         /> 
     )
 }

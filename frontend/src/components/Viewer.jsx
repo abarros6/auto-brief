@@ -6,7 +6,7 @@ const Viewer = ({document, setDocument, viewerRef}) => {
         <Quill
             value={document}
             setValue={setDocument}
-            ref={viewerRef}
+            reference={viewerRef}
         />  
     )
 }
