@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import { saveAs } from "file-saver";
 import { pdfExporter } from "quill-to-pdf";
 import { downloadObjectAsJson } from "../utils/download.js";
+import * as quillToWord from "quill-to-word";
 
 function Editor({content, setContent, document, setDocument}) {
 
@@ -18,6 +19,15 @@ function Editor({content, setContent, document, setDocument}) {
             return alert("Content not found");
         }
         downloadObjectAsJson(deltas.ops, "editor-text");
+    };
+
+    const exportAsDOCX = async () => {
+        const delta = editorRef.current?.editor?.getContents(); // gets the Quill delta
+        const configuration = {
+            exportAs: 'blob' // could also be 'buffer', 'base64', or 'doc'
+        }
+        const docxAsBlob = await quillToWord.generateWord(delta, configuration); // converts to DOCX
+        saveAs(docxAsBlob, "docx-export.docx"); // downloads from the browser
     };
 
     const exportAsPDF = async () => {
@@ -73,6 +83,9 @@ function Editor({content, setContent, document, setDocument}) {
                 <button className='m-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' onClick={clearDocument}>
                     Clear document
                 </button>
+                <button className='m-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' onClick={exportAsDOCX}>
+                    Export DOCX
+                </button>
                 </div>
                 <ReactQuill
                     defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
@@ -123,7 +136,5 @@ function Editor({content, setContent, document, setDocument}) {
         </>
     )
 }
-
-
 
 export default Editor
