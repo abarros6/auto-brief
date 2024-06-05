@@ -37,26 +37,26 @@ function Editor({content, setContent, document, setDocument}) {
     const generateText = () => {
         let brief = content.brief
         let citations = content.citations
-        let text = `Brief: `
-        text += `Facts: ${brief.facts}`
-        text += `Issues: ${brief.issues}`
-        text += `Held: ${brief.held}`
-        text += `Ratio: ${brief.ratio}`
-        text += `Reasoning: ${brief.reasoning}`
-        text += `Policy: ${brief.policy}`
-        text += `Citations:`
+        let text = ``
+        text += `<h3>Facts:</h3> ${brief.facts}`
+        text += `<br><h3>Issues:</h3> ${brief.issues}`
+        text += `<br><h3>Held:</h3> ${brief.held}`
+        text += `<br><h3>Ratio:</h3> ${brief.ratio}`
+        text += `<br><h3>Reasoning:</h3> ${brief.reasoning}`
+        text += `<br><h3>Policy:</h3> ${brief.policy}`
+        //text += `<br><br><b>Citations:</b>`
         // for (let i = 0; i < citations.length; i++) {
         //     text += `${citations[i]}`
         // }
 
         let keys = Object.keys(citations)
 
-        for (let i = 0; i < keys.length; i++) {
+        /*for (let i = 0; i < keys.length; i++) {
             let citation = citations[keys[i]]
             citation.map((category, index) => { 
                 text += `${category}`
             })
-        }
+        }*/
         setValue(text)
     }
     
@@ -79,6 +79,8 @@ function Editor({content, setContent, document, setDocument}) {
                     style={{ height: "60vh", width: "100%" }}
                     theme="snow"
                     value={value}
+                    className="ql-editor"
+                    size="large"
                     onChange={setValue}
                     modules={{
                         toolbar: [
