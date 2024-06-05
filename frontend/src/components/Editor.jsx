@@ -17,7 +17,7 @@ function Editor({content, setContent, editorRef}) {
         let text = ``
         text += `<h3>Facts:</h3> ${brief.facts}`
         text += `<br><h3>Issues:</h3> ${brief.issues}`
-        text += `<br><h3>Held:</h3> ${brief.held}`
+        text += `<br><h3><span style="background-color: yellow;">Held:</span></h3> ${brief.held}`
         text += `<br><h3>Ratio:</h3> ${brief.ratio}`
         text += `<br><h3>Reasoning:</h3> ${brief.reasoning}`
         text += `<br><h3>Policy:</h3> ${brief.policy}`

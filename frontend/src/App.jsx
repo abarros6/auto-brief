@@ -20,18 +20,6 @@ const App = () => {
   const editorRef = useRef(null);
   const viewerRef = useRef(null);
 
-  const spotPara = (text) => {
-    // Define the regular expression to find square brackets containing numbers
-    const regex = /\[(\d+)\]/g;
-  
-    // Use the replace method to inject line breaks and wrap the matched content in <h3> tags
-    const transformedString = text.replace(regex, (match, p1) => {
-        return `<br><h3>${match}</h3>`;
-    });
-  
-    return transformedString;
-  }
-
   const exportDocument = () => {
       const deltas = editorRef.current?.editor?.getContents();
       if (!deltas) {
@@ -119,6 +107,18 @@ const App = () => {
       />
     </div>
   )
+}
+
+const spotPara = (text) => {
+  // Define the regular expression to find square brackets containing numbers
+  const regex = /\[(\d+)\]/g;
+
+  // Use the replace method to inject line breaks and wrap the matched content in <h3> tags
+  const transformedString = text.replace(regex, (match, p1) => {
+      return `<br><h3>${match}</h3>`;
+  });
+
+  return transformedString;
 }
 
 export default App
