@@ -3,6 +3,10 @@ import 'react-quill/dist/quill.snow.css';
 
 function Quill ({value, setValue, reference, readOnly, color = ''}) {
     
+    //maybe add an array prop customActions that takes an array of event handlers
+    //to add to the quill toolbar as custom actions 
+    //use this to implement the up and down buttons that cycle throught the citations
+
     return (
         <ReactQuill
             defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
