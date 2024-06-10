@@ -7,6 +7,11 @@ function Editor({content, setContent, editorRef}) {
         JSON.parse(localStorage.getItem("document") || "[]")
     );
 
+    const colors = [
+        'hsla(0, 100%, 50%, 0.5)', 'hsla(120, 100%, 50%, 0.5)', 'hsla(240, 100%, 50%, 0.5)', 
+        'hsla(60, 100%, 50%, 0.5)', 'hsla(300, 100%, 50%, 0.5)', 'hsla(180, 100%, 50%, 0.5)'
+    ];
+
     useEffect(() => {
         generateText()
     }, [content]) 
@@ -26,14 +31,15 @@ function Editor({content, setContent, editorRef}) {
         text += `<br><br><h3>Reasoning:</h3><br>${brief.reasoning}`
         text += `<br><br><h3>Policy:</h3><br>${brief.policy}`
         text += `<br><br><h1 style = '${editorStyles.header}'>Citations</h1>`
+    
 
         let keys = Object.keys(citations)
 
-        for (let i = 0; i < keys.length; i++) {
+        for (let i = 0; i < keys.length ; i++) {
             let citation = citations[keys[i]]
             
-            citation.map((category, index) => {
-                text += `<br><span style="background-color: yellow;">[${i+index }]</span>  ${category}<br>`
+            citation.map((category) => {
+                text += `<br><span style="background-color: ${colors[i]};">${category}</span><br>`
             })
         }
         setValue(text)

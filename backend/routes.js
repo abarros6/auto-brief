@@ -36,7 +36,7 @@ router.post('/upload-pdf', upload.single('pdf'), async (req, res) => {
                 }
             });
 
-            res.send({'summary': summary, 'pdfText': data.text}).status(200)
+            res.send({'summary': summary, 'pdfText': data.text.replace(/(\r\n|\n|\r)/gm, "")}).status(200)
 
             //this is the gpt call below
             //generateSummary(data.text).then((a)=>{res.status(200).send(a)});

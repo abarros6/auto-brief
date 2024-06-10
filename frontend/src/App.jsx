@@ -10,13 +10,9 @@ import * as quillToWord from "quill-to-word";
 
 const App = () => {
   const [pdf, setPdf] = useState(null);
-  // const [content, setContent] = useState({
-  //     brief:{},
-  //     citations: {},
-  // });
   const [uploaded, setUploaded] = useState(false);
   const [content, setContent] = useState(null);
-  const [document, setDocument] = useState('')
+  const [document, setDocument] = useState(null)
   const editorRef = useRef(null);
   const viewerRef = useRef(null);
 
@@ -114,7 +110,7 @@ const spotPara = (text) => {
   const regex = /\[(\d+)\]/g;
 
   // Use the replace method to inject line breaks and wrap the matched content in <h3> tags
-  const transformedString = text.replace(regex, (match, p1) => {
+  const transformedString = text.replace(regex, match => {
       return `<br><h3>${match}</h3>`;
   });
 
