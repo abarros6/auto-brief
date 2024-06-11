@@ -26,7 +26,8 @@ function Quill ({value, setValue, reference, readOnly, color = ''}) {
     return (
         <ReactQuill
             defaultValue={JSON.parse(localStorage.getItem("document") || "[]")}
-            style={{ height: "100%", width: "100%", overflow: "hidden", backgroundColor: color }}
+            style={{  height: "calc(100% - 42px)", width: "100%", overflow: "hidden", backgroundColor: color }}
+            className='mb-10 z-0'
             theme="snow"
             value={value}
             onChange={setValue}

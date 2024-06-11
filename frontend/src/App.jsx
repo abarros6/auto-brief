@@ -7,8 +7,6 @@ import { downloadObjectAsJson } from "./utils/download.js";
 import * as quillToWord from "quill-to-word";
 import formatter from './utils/pdfFormat.js';
 
-
-
 const App = () => {
   const [pdf, setPdf] = useState(null);
   const [uploaded, setUploaded] = useState(false);
@@ -96,7 +94,7 @@ const App = () => {
           for (let i = 0; i < Object.keys(citations).length ; i++) {
               citations[Object.keys(citations)[i]].map((text) => {
                   editorText += `<br><span style="background-color: ${colors[i]};">${text}</span><br>`
-                  documentWithHighlights = documentWithHighlights.replace(text, `<span  style="background-color: ${colors[i]};">${text}</span>`)
+                  documentWithHighlights = documentWithHighlights.replace(text, `<span style="background-color: ${colors[i]};" id = "citation-${i}" >${text}</span>`)
               })
           }
       
@@ -110,7 +108,7 @@ const App = () => {
   }
 
   return (
-    <div className='flex flex-col text-center min-h-screen p-8'>
+    <div className='flex flex-col text-center min-h-screen max-h-screen p-8'>
       <Navbar 
         uploadOnClick={uploadOnClick} 
         handleFileChange={handleFileChange}
@@ -119,8 +117,8 @@ const App = () => {
         exportDocument={exportDocument}  
         exportAsDOCX={exportAsDOCX}
         uploaded={uploaded}
+        pdf={pdf}
       />
-      {/* <h1 className='p-8 text-4xl'>Auto-Brief</h1> */}
       <Documents
         content={content}
         setContent={setContent}
