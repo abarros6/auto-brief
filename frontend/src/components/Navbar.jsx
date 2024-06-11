@@ -1,6 +1,6 @@
 function Navbar ({uploadOnClick, handleFileChange, exportAsPDF, clearDocument, exportDocument, exportAsDOCX, uploaded}) {
     return ( 
-        <div className="navbar rounded-md bg-secondary">
+        <div className="navbar rounded-md bg-secondary mb-2">
             <div className="navbar-start">
                 <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -36,29 +36,29 @@ function Navbar ({uploadOnClick, handleFileChange, exportAsPDF, clearDocument, e
                     </div>
                 </ul>
             </div>
-            <div className="navbar-end hidden lg:flex">
+            <div className="navbar-end hidden lg:flex" >
                 <details className="dropdown dropdown-end">
                     <summary className="m-1 btn bg-primary">Editable Document Options</summary>
                     <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                         <li>
-                            <button className='btn btn-primary m-1' onClick={exportAsPDF}>
+                            <button disabled={!uploaded} className='btn btn-primary m-1' onClick={exportAsPDF}>
                                 Export as PDF
                             </button>
                         </li>
                         <li>
-                            <a className='btn btn-primary m-1' onClick={exportDocument}>
+                            <button disabled={!uploaded} className='btn btn-primary m-1' onClick={exportDocument}>
                                 Export as file
-                            </a>
+                            </button>
                         </li>
                         <li>
-                            <a className='btn btn-primary m-1' onClick={exportAsDOCX}>
+                            <button disabled={!uploaded} className='btn btn-primary m-1' onClick={exportAsDOCX}>
                                 Export as DOCX
-                            </a>
+                            </button>
                         </li>
                         <li>
-                            <a className='btn btn-primary m-1' onClick={clearDocument}>
+                            <button disabled={!uploaded} className='btn btn-primary m-1' onClick={clearDocument}>
                                 Clear Document
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </details>

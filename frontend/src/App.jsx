@@ -5,6 +5,7 @@ import { saveAs } from "file-saver";
 import { pdfExporter } from "quill-to-pdf";
 import { downloadObjectAsJson } from "./utils/download.js";
 import * as quillToWord from "quill-to-word";
+import formatter from './utils/pdfFormat.js';
 
 
 
@@ -15,6 +16,15 @@ const App = () => {
   const [document, setDocument] = useState(null)
   const editorRef = useRef(null);
   const viewerRef = useRef(null);
+
+  const colors = [
+      'hsla(0, 100%, 50%, 0.5)', 'hsla(120, 100%, 50%, 0.5)', 'hsla(240, 100%, 50%, 0.5)', 
+      'hsla(60, 100%, 50%, 0.5)', 'hsla(300, 100%, 50%, 0.5)', 'hsla(180, 100%, 50%, 0.5)'
+  ];
+
+  const editorStyles = {
+    header: 'text-align: center'
+  }
 
   const exportDocument = () => {
       const deltas = editorRef.current?.editor?.getContents();
@@ -72,8 +82,26 @@ const App = () => {
           let citations = response.summary.citations
           let text = response.pdfText
 
-          setContent({brief: brief, citations: citations});
-          setDocument(spotPara(text))
+          let editorText = `<h1 style = '${editorStyles.header}'>Brief</h1><br>`
+          editorText += `<h3>Facts:</h3><br>${brief.facts}`
+          editorText += `<br><br><h3>Issues:</h3><br>${brief.issues}`
+          editorText += `<br><br><h3>Held:</h3><br>${brief.held}`
+          editorText += `<br><br><h3>Ratio:</h3><br>${brief.ratio}`
+          editorText += `<br><br><h3>Reasoning:</h3><br>${brief.reasoning}`
+          editorText += `<br><br><h3>Policy:</h3><br>${brief.policy}`
+          editorText += `<br><br><h1 style = '${editorStyles.header}'>Citations</h1>`
+          
+          let documentWithHighlights = formatter.removeConsecutiveSpaces(text)
+
+          for (let i = 0; i < Object.keys(citations).length ; i++) {
+              citations[Object.keys(citations)[i]].map((text) => {
+                  editorText += `<br><span style="background-color: ${colors[i]};">${text}</span><br>`
+                  documentWithHighlights = documentWithHighlights.replace(text, `<span  style="background-color: ${colors[i]};">${text}</span>`)
+              })
+          }
+      
+          setDocument(formatter.spotPara(documentWithHighlights))
+          setContent(editorText);
           setUploaded(true)
 
       } catch (error) {
@@ -92,7 +120,7 @@ const App = () => {
         exportAsDOCX={exportAsDOCX}
         uploaded={uploaded}
       />
-      <h1 className='p-8 text-4xl'>Auto-Brief</h1>
+      {/* <h1 className='p-8 text-4xl'>Auto-Brief</h1> */}
       <Documents
         content={content}
         setContent={setContent}
@@ -100,21 +128,10 @@ const App = () => {
         document={document}
         setDocument={setDocument}
         viewerRef={viewerRef}
+        color={colors}
       />
     </div>
   )
-}
-
-const spotPara = (text) => {
-  // Define the regular expression to find square brackets containing numbers
-  const regex = /\[(\d+)\]/g;
-
-  // Use the replace method to inject line breaks and wrap the matched content in <h3> tags
-  const transformedString = text.replace(regex, match => {
-      return `<br><h3>${match}</h3>`;
-  });
-
-  return transformedString;
 }
 
 export default App
