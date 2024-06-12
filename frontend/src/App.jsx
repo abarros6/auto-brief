@@ -91,10 +91,10 @@ const App = () => {
           
           let documentWithHighlights = formatter.removeConsecutiveSpaces(text)
 
-          for (let i = 0; i < Object.keys(citations).length ; i++) {
-              citations[Object.keys(citations)[i]].map((text) => {
-                  editorText += `<br><span style="background-color: ${colors[i]};">${text}</span><br>`
-                  documentWithHighlights = documentWithHighlights.replace(text, `<span style="background-color: ${colors[i]};" id = "citation-${i}" >${text}</span>`)
+          for (let i = 1; i < Object.keys(citations).length + 1 ; i++) {
+              citations[Object.keys(citations)[i-1]].map((text, index) => {
+                  editorText += `<br><span style="background-color: ${colors[i-1]};">${text}</span><br>`
+                  documentWithHighlights = documentWithHighlights.replace(text, `<span style="background-color: ${colors[i-1]};" id = "citation-${i + index}" >${text}</span>`)
               })
           }
       
@@ -119,6 +119,7 @@ const App = () => {
         uploaded={uploaded}
         pdf={pdf}
       />
+
       <Documents
         content={content}
         setContent={setContent}

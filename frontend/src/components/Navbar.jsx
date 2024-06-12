@@ -4,6 +4,14 @@ function Navbar ({pdf, uploadOnClick, handleFileChange, exportAsPDF, clearDocume
 
     const [currentCitation, setCurrentCitation] = useState(1);
 
+    const goToNextCitation = () => {
+        setCurrentCitation(currentCitation + 1);
+    }
+
+    const goToPreviousCitation = () => {
+        setCurrentCitation(currentCitation - 1);
+    }
+
     const closeMenu = () => {
         document.getElementById("my-drawer-3").checked = false;
     }
@@ -36,6 +44,30 @@ function Navbar ({pdf, uploadOnClick, handleFileChange, exportAsPDF, clearDocume
                                 
                                 <input className='file-input file-input-bordered file-input-primary' type="file" accept=".pdf" onChange={handleFileChange} />
                                 
+                            </div>
+
+                            <a
+                                onClick={goToPreviousCitation}
+                                className='btn btn-primary m-1'
+                                disabled={pdf === null}
+                                href={`#citation-${currentCitation}`}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M12 1L1 15h10v8h4v-8h10L12 1z"/>
+                                </svg>
+                            </a>
+                            <a
+                                onClick={goToNextCitation}
+                                className='btn btn-primary m-1'
+                                disabled={pdf === null}
+                                href={`#citation-${currentCitation}`}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M12 23L23 9h-10v-8h-4v8H1l11 14z"/>
+                                </svg>
+                            </a>
+                            <div className="flex items-center">
+                                <h1 className="text-xl font-bold" >Citation {currentCitation}</h1>
                             </div>
                         </ul>
                     </div>
@@ -70,44 +102,42 @@ function Navbar ({pdf, uploadOnClick, handleFileChange, exportAsPDF, clearDocume
                 </div>
             </div> 
             <div className="drawer-side z-50">
-            <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label> 
-                <ul className="menu w-screen min-h-full bg-base-300">
+                <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label> 
+                <ul className="menu w-full min-h-full bg-base-300 flex justify-center">
                     <li>
-                        <button className='btn btn-primary m-4' onClick={closeMenu}>
+                        <button className='btn btn-primary m-auto w-3/4' onClick={closeMenu}>
                             Close Menu
                         </button>
                     </li>
                     <li>
-                        <button disabled={!uploaded} className='btn btn-primary m-4 ' onClick={exportAsPDF}>
+                        <button disabled={!uploaded} className='btn btn-primary m-auto w-3/4 my-4' onClick={exportAsPDF}>
                             Export as PDF
                         </button>
                     </li>
                     <li>
-                        <button disabled={!uploaded} className='btn btn-primary m-4 ' onClick={exportDocument}>
+                        <button disabled={!uploaded} className='btn btn-primary m-auto w-3/4' onClick={exportDocument}>
                             Export as file
                         </button>
                     </li>
                     <li>
-                        <button disabled={!uploaded} className='btn btn-primary m-4 ' onClick={exportAsDOCX}>
+                        <button disabled={!uploaded} className='btn btn-primary m-auto w-3/4 my-4' onClick={exportAsDOCX}>
                             Export as DOCX
                         </button>
                     </li>
                     <li>
-                        <button disabled={!uploaded} className='btn btn-primary m-4 ' onClick={clearDocument}>
+                        <button disabled={!uploaded} className='btn btn-primary m-auto w-3/4' onClick={clearDocument}>
                             Clear Document
                         </button>
                     </li>
-                    <li>
-                            <div className="flex flex-col"> 
-                                <input className='file-input file-input-bordered file-input-primary' type="file" accept=".pdf" onChange={handleFileChange} />
-                                <button
-                                    onClick={uploadOnClick}
-                                    className='btn btn-primary m-4 '
-                                    disabled={uploaded || pdf === null}
-                                >
-                                    Upload PDF
-                                </button>
-                            </div>
+                    <li className="flex flex-row m-auto my-4 w-3/4">
+                        <input className='file-input file-input-bordered file-input-primary w-3/4' type="file" accept=".pdf" onChange={handleFileChange} />
+                        <button
+                            onClick={uploadOnClick}
+                            className='btn btn-primary w-1/4'
+                            disabled={uploaded || pdf === null}
+                        >
+                            Upload PDF
+                        </button>
                     </li>
                 </ul>
             </div>
